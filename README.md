@@ -1,2 +1,2 @@
 # Type-Fast
-Roguelike Typing game
+Roguelike Typing game, earn coins to progress further!
