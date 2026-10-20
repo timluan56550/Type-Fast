@@ -5,7 +5,8 @@ const bank=[
 "Real green grass grows past the door for the indoor person",
 "Bare toes touch cold dirt far away from the glowing monitor screen",
 "Fresh air blows past the open window onto the tired desk chair",
-"Real sunlight hits the green lawn outside the dark bedroom wall"
+"Real sunlight hits the green lawn outside the dark bedroom wall",
+"A secret message you will probably never encounter but if you do I'm sorry: jEweLrY 659182 -_=^#* IllIliIlil"
 ]
 
 //gives a random item in the bank

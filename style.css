@@ -35,12 +35,20 @@ overflow: hidden;
     font-size:6cqmin;
     font-family: 'Roboto Mono',monospace;
     /* makes it easier to read each character */
-    letter-spacing: 0.3cqmin;
+    letter-spacing: 0.1cqmin;
     /* Testing this value might change if its not something I'm looking for */
     white-space: pre-wrap;
     text-align: center;
 }
-/* Untyped letters */
+#typing-display.typing #cursorMove{
+    animation:none;
+    opacity: 1;
+}
+
+/*letters with diff classes */
+.letter{
+    white-space: pre-wrap;
+}
 .letter.untyped{
 color: #768082;
 }
@@ -49,4 +57,20 @@ color: #768082;
 }
 .letter.incorrect{
     color: #fd3a3a;
+}
+
+/* cursor stuff */
+@keyframes blink{
+    0%{opacity:1;}
+    50%{opacity:0;}
+    100%{opacity:1;}
+}
+#cursorMove{
+    position: absolute;
+    width: 0.5cqmin;
+    height:6cqmin;
+    background-color: #41ce5c;
+    border-radius: 1cqmin;
+    transition: left 0.13s ease-out, top 0.1s ease-out;
+    animation: blink 1s infinite;
 }

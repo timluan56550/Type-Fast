@@ -1,14 +1,24 @@
 let currentPhrase=""
 let currentIndex=0;
-
+let currentStartIndex=0;
+let typingTimer;
+// const letterSpan=typingDisplay.querySelectorAll(".letter")
 const typingDisplay=document.getElementById("typing-display")
 //Temporary until I add a Start game button
 newBankItem();
 
+
+
+
 function newBankItem(){
     currentPhrase=randomBank();
     currentIndex=0;
+    currentStartIndex=0;
     typingDisplay.innerHTML="";
+    //makes a copy of the cursor because i jsut cleared the HTMl
+    const cursorElement=document.createElement("div")
+    cursorElement.id="cursorMove"
+    typingDisplay.appendChild(cursorElement)
     // for each letter in the item
     for(let x=0; x<currentPhrase.length; x++){
         const charSpan=document.createElement("span")
@@ -18,15 +28,44 @@ function newBankItem(){
         //adds the charSpan into the parent
         typingDisplay.appendChild(charSpan)
     }
+    moveCursor();
+
 }
 
+
+
+
+//key checks and puts the letter based on user input in classes
 window.addEventListener("keydown", (e)=>{
-    //checks for single character keys not e.g shift, bspac
-    if(e.key.length>1){
+    if(e.key.length>1 && e.key!=="Backspace"){
         return;
     }
+    typingDisplay.classList.add("typing")
+    //clears existing timer and start a new one
+    clearTimeout(typingTimer)
+    typingTimer=setTimeout(()=>{
+        typingDisplay.classList.remove("typing");
+    }, 1200)
     //puts all the span elements with class letter inside typingDisplay and puts it in letterSpan
     const letterSpan=typingDisplay.querySelectorAll(".letter")
+    //Remember case sensitive
+    if(e.key==="Backspace"){
+        //prevents going back to teh prvious word
+        if(currentIndex>currentStartIndex){
+            currentIndex--;
+        //reset the class to be able to be reclassed again
+        letterSpan[currentIndex].classList.remove("correct", "incorrect")
+        letterSpan[currentIndex].classList.add("untyped")
+        }
+        moveCursor();
+        return;
+    }
+    //checks for single character keys not e.g shift, bspac
+    
+    //stops when the end of the phrase
+    if(currentIndex>=currentPhrase.length){
+        return;
+    }
     //find the character the use is supposed to type next
     const targetChar=currentPhrase[currentIndex];
     
@@ -34,11 +73,85 @@ window.addEventListener("keydown", (e)=>{
         //move items between the classes
         letterSpan[currentIndex].classList.remove("untyped")
         letterSpan[currentIndex].classList.add("correct")
-        //next letter
-        currentIndex++;
     }else{
         letterSpan[currentIndex].classList.remove("untyped")
         letterSpan[currentIndex].classList.add("incorrect")
-
     }
+    //next letter
+    currentIndex++;
+    //Check if the target Char is a space or when end of the phrase
+    if(targetChar===" " || currentIndex===currentPhrase.length){
+        //checks it
+        checkCompleteWord();
+        //shifts over to start a new word
+        currentStartIndex=currentIndex;
+    }
+    if(currentIndex>=currentPhrase.length){
+        console.log("new phrase")
+        setTimeout(newBankItem,500);
+    }
+    moveCursor();
+
 })
+
+
+
+
+
+
+
+//--------------------------------------------------------
+//functions about word checking below
+//THIS LINE HELPS ME SEE IT SO I CAN FIND MY FUNcTIONS BETTER
+
+
+
+//checks if the word contains any errors
+function checkCompleteWord(){
+    //puts all the span elements with class letter inside typingDisplay and puts it in letterSpan
+    const letterSpan=typingDisplay.querySelectorAll(".letter")
+    let wordError=false;
+    //checks each letter if its incorrect using the class
+    for(let x=currentStartIndex; x <currentIndex; x++){
+        //checks if the letter is in the class incorrect
+        if(letterSpan[x].classList.contains("incorrect")){
+            wordError=true;
+            //stops the loop
+            break;
+        }
+    }
+    //runs the function when there is an error
+    if(wordError){
+        onWordCompleteWithErrors();
+    }
+}
+
+function moveCursor(){
+    const cursorElement=document.getElementById("cursorMove")
+    const letterSpan=typingDisplay.querySelectorAll(".letter")
+    //if there is no more letter spans, it stops
+    if(letterSpan.length===0){
+        return;
+    }
+    //checks if its at the end of the phrase
+    const isAtEnd=currentIndex>=letterSpan.length;
+    //If we are at the end, measure using the last letter span
+    //if we are not at the end, measure using the index
+    const targetSpan= isAtEnd ? letterSpan[letterSpan.length-1] : letterSpan[currentIndex]
+    //Find the horizontal position
+    //offsetLeft =distance from left edge of container
+    //offsetWidth= width of the letter
+    //so leftPosition= currentLetter's distance to the left wall + (0) or sometimes width of the letter
+    const leftPosition=targetSpan.offsetLeft + (isAtEnd ? targetSpan.offsetWidth:0)
+
+    cursorElement.style.left=leftPosition+"px"
+    cursorElement.style.top=targetSpan.offsetTop+"px";
+}
+    
+
+
+//a function that happens when there is
+function onWordCompleteWithErrors(){
+    console.log("Word completed with errors")
+    // add more ltr
+}
