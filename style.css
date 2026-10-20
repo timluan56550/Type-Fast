@@ -1,5 +1,52 @@
+@import url('https://googleapis.com');
 body{
 background-color: lightslategrey;
 margin: 0;
 padding: 0;
+
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+overflow: hidden;
+}
+#everything{
+    width: 100vw;
+    height: 100vh;
+    aspect-ratio: 16/9;
+
+    max-width: calc(100vh * (16 / 9));
+    max-height: calc(100vw * (9 / 16));
+    background-color: #212830;
+    /* Parent refrence point */
+    position: relative;
+    border: 4px dashed gold;
+    box-sizing: border-box;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height and width */
+    container-type: size;
+    /* padding: 5cqmin; */
+}
+/* cqmin-picks the lower between block and inline */
+#typing-display{
+    font-size:6cqmin;
+    font-family: 'Roboto Mono',monospace;
+    /* makes it easier to read each character */
+    letter-spacing: 0.3cqmin;
+    /* Testing this value might change if its not something I'm looking for */
+    white-space: pre-wrap;
+    text-align: center;
+}
+/* Untyped letters */
+.letter.untyped{
+color: #768082;
+}
+.letter.correct{
+    color: #dae3eb;
+}
+.letter.incorrect{
+    color: #fd3a3a;
 }
