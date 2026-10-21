@@ -37,6 +37,7 @@ function newBankItem(){
 
 //key checks and puts the letter based on user input in classes
 window.addEventListener("keydown", (e)=>{
+    //return if its shift, ctrl, esc but not backspace
     if(e.key.length>1 && e.key!=="Backspace"){
         return;
     }
@@ -48,7 +49,10 @@ window.addEventListener("keydown", (e)=>{
     }, 1200)
     //puts all the span elements with class letter inside typingDisplay and puts it in letterSpan
     const letterSpan=typingDisplay.querySelectorAll(".letter")
-    //Remember case sensitive
+
+
+
+
     if(e.key==="Backspace"){
         //prevents going back to teh prvious word
         if(currentIndex>currentStartIndex){
@@ -56,12 +60,15 @@ window.addEventListener("keydown", (e)=>{
         //reset the class to be able to be reclassed again
         letterSpan[currentIndex].classList.remove("correct", "incorrect")
         letterSpan[currentIndex].classList.add("untyped")
+        
+        if(currentPhrase[currentIndex]===" "){
+            letterSpan[currentIndex].innerText=" ";
         }
         moveCursor();
-        return;
     }
-    //checks for single character keys not e.g shift, bspac
-    
+    return;
+
+}
     //stops when the end of the phrase
     if(currentIndex>=currentPhrase.length){
         return;
@@ -69,6 +76,23 @@ window.addEventListener("keydown", (e)=>{
     //find the character the use is supposed to type next
     const targetChar=currentPhrase[currentIndex];
     
+    //if target is space but you did not type space
+if(targetChar===" "&& e.key!==" "){
+    //swaps the space with your incorrect
+    letterSpan[currentIndex].innerText=e.key 
+    //puts it in the right class
+    letterSpan[currentIndex].classList.remove("untyped")
+    letterSpan[currentIndex].classList.add("incorrect")
+    currentIndex++;
+    checkCompleteWord();
+    currentStartIndex=currentIndex;
+    moveCursor()
+    return;
+}
+
+
+
+
     if(e.key===targetChar){
         //move items between the classes
         letterSpan[currentIndex].classList.remove("untyped")
@@ -120,9 +144,16 @@ function checkCompleteWord(){
             break;
         }
     }
-    //runs the function when there is an error
     if(wordError){
+        //this selects all the letters in the current word
+        for(let x=currentStartIndex; x<currentIndex; x++){
+            if(currentPhrase[x]!==" "){
+            letterSpan[x].classList.add("errorWord")
+            }
+        }
         onWordCompleteWithErrors();
+    }else{
+        onWordCompleteWithoutErrors();
     }
 }
 
@@ -150,8 +181,3 @@ function moveCursor(){
     
 
 
-//a function that happens when there is
-function onWordCompleteWithErrors(){
-    console.log("Word completed with errors")
-    // add more ltr
-}

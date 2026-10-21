@@ -58,6 +58,9 @@ color: #768082;
 .letter.incorrect{
     color: #fd3a3a;
 }
+.letter.errorWord{
+    text-decoration: underline #fd3a3a 0.2cqmin;
+}
 
 /* cursor stuff */
 @keyframes blink{
