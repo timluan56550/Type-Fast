@@ -2,11 +2,15 @@ let currentPhrase=""
 let currentIndex=0;
 let currentStartIndex=0;
 let typingTimer;
+let gameStartTime=0;
+
 // const letterSpan=typingDisplay.querySelectorAll(".letter")
 const typingDisplay=document.getElementById("typing-display")
 //Temporary until I add a Start game button
 newBankItem();
-
+window.addEventListener("click", ()=>{
+    newBankItem();
+})
 
 
 
@@ -41,6 +45,12 @@ window.addEventListener("keydown", (e)=>{
     if(e.key.length>1 && e.key!=="Backspace"){
         return;
     }
+    if(currentIndex===0){
+        gameStartTime=performance.now();
+    }
+    if(currentIndex===currentStartIndex){
+        wordStartTime=performance.now()
+    }
     typingDisplay.classList.add("typing")
     //clears existing timer and start a new one
     clearTimeout(typingTimer)
@@ -60,6 +70,7 @@ window.addEventListener("keydown", (e)=>{
         //reset the class to be able to be reclassed again
         letterSpan[currentIndex].classList.remove("correct", "incorrect")
         letterSpan[currentIndex].classList.add("untyped")
+        delete letterSpan[currentIndex].dataset.wrongChar;
         
         if(currentPhrase[currentIndex]===" "){
             letterSpan[currentIndex].innerText=" ";
@@ -79,7 +90,8 @@ window.addEventListener("keydown", (e)=>{
     //if target is space but you did not type space
 if(targetChar===" "&& e.key!==" "){
     //swaps the space with your incorrect
-    letterSpan[currentIndex].innerText=e.key 
+    letterSpan[currentIndex].innerText=" ";
+    letterSpan[currentIndex].dataset.wrongChar=e.key
     //puts it in the right class
     letterSpan[currentIndex].classList.remove("untyped")
     letterSpan[currentIndex].classList.add("incorrect")
@@ -111,7 +123,10 @@ if(targetChar===" "&& e.key!==" "){
         currentStartIndex=currentIndex;
     }
     if(currentIndex>=currentPhrase.length){
+        const totalErrors=typingDisplay.querySelectorAll(".letter.incorrect").length;
         console.log("new phrase")
+        calcWPM(currentPhrase.length, gameStartTime, totalErrors);
+        gameStartTime=0;
         setTimeout(newBankItem,500);
     }
     moveCursor();
@@ -144,6 +159,7 @@ function checkCompleteWord(){
             break;
         }
     }
+    const wordLength=currentIndex-currentStartIndex;
     if(wordError){
         //this selects all the letters in the current word
         for(let x=currentStartIndex; x<currentIndex; x++){
@@ -151,9 +167,9 @@ function checkCompleteWord(){
             letterSpan[x].classList.add("errorWord")
             }
         }
-        onWordCompleteWithErrors();
+        onWordCompleteWithErrors(wordLength);
     }else{
-        onWordCompleteWithoutErrors();
+        onWordCompleteWithoutErrors(wordLength);
     }
 }
 

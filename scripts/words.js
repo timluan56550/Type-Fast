@@ -1,4 +1,6 @@
 const bank=[
+    "testWPMbytyping",
+    "testhowlongandifitwrapscorrectlyornot1234567888899d9as9d9asd",
 "the quick brown fox jumps over the lazy dog",
 "eases aseasesafhsdf dfhoadhfkjadjkfio",
 "Wild blades of grass wait outside for the pale screen watcher",

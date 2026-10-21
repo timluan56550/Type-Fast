@@ -38,6 +38,8 @@ overflow: hidden;
     letter-spacing: 0.1cqmin;
     /* Testing this value might change if its not something I'm looking for */
     white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: break-word;
     text-align: center;
 }
 #typing-display.typing #cursorMove{
@@ -57,9 +59,19 @@ color: #768082;
 }
 .letter.incorrect{
     color: #fd3a3a;
+    position: relative;
 }
 .letter.errorWord{
     text-decoration: underline #fd3a3a 0.2cqmin;
+}
+/* puts the wrong key over the space without breaking the wrapping */
+.letter.incorrect[data-wrong-char]::after{
+    content: attr(data-wrong-char);
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    color: #fd3a3a;
 }
 
 /* cursor stuff */
