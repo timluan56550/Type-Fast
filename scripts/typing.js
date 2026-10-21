@@ -3,6 +3,7 @@ let currentIndex=0;
 let currentStartIndex=0;
 let typingTimer;
 let gameStartTime=0;
+let currentDifficulty="easy";
 
 // const letterSpan=typingDisplay.querySelectorAll(".letter")
 const typingDisplay=document.getElementById("typing-display")
@@ -19,6 +20,8 @@ function newBankItem(){
     currentIndex=0;
     currentStartIndex=0;
     typingDisplay.innerHTML="";
+    //starts a new round
+    gamemode(currentDifficulty);
     //makes a copy of the cursor because i jsut cleared the HTMl
     const cursorElement=document.createElement("div")
     cursorElement.id="cursorMove"
@@ -122,10 +125,13 @@ if(targetChar===" "&& e.key!==" "){
         //shifts over to start a new word
         currentStartIndex=currentIndex;
     }
+
+    //when you end a phrase
     if(currentIndex>=currentPhrase.length){
         const totalErrors=typingDisplay.querySelectorAll(".letter.incorrect").length;
         console.log("new phrase")
-        calcWPM(currentPhrase.length, gameStartTime, totalErrors);
+        const finalStats=calcWPM(currentPhrase.length, gameStartTime, totalErrors);
+        evaluateRound(finalStats)
         gameStartTime=0;
         setTimeout(newBankItem,500);
     }

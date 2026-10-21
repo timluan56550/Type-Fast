@@ -44,6 +44,7 @@ overflow: hidden;
     border: 2px dashed gold;
     /* box-sizing: border-box; */
     margin: 4cqmin;
+    padding: 0 10cqmin;
 }
 #typing-display.typing #cursorMove{
     animation:none;

@@ -1,10 +1,50 @@
 let wordStartTime=0;
-let coins=0;
+// let coins=0;
 let streak=0;
+let wins=0;
+let currentTarget=null;
+// const baseCoinValue=10;
 
-
-const baseCoinValue=10;
-
+const difficulties={
+    easy:{ min:10, max: 60, margin:6, minA:80, maxA:90, hideWPM:false, hideAcc:false},
+    medium:{ min:40, max: 80, margin:3, minA:85, maxA:95, hideWPM:true, hideAcc: false},
+    hard:{ min:60, max: 120, margin:1, minA:100, maxA:100, hideWPM:true, hideAcc: true}
+}
+function gamemode(){
+const difficulty=difficulties[currentDifficulty]
+//picks a random WPM and accuracy
+const baseWPM=Math.floor(Math.random()*(difficulty.max-difficulty.min+1))+difficulty.min
+const targetAcc=Math.floor(Math.random()*(difficulty.maxA-difficulty.minA+1))+difficulty.minA
+currentTarget={
+    targetWPM: baseWPM,
+    minWPM: baseWPM-difficulty.margin,
+    maxWPM: baseWPM+difficulty.margin,
+    targetAcc: targetAcc,
+    hideWPM:difficulty.hideWPM,
+    hideAcc: difficulty.hideAcc
+}
+console.log("WPM RANGE: "+currentTarget.minWPM+"---"+currentTarget.maxWPM)
+console.log("REQUIRED ACCURACY: GREATER OR EQUAL TO "+currentTarget.targetAcc+"%")
+return currentTarget;
+}
+function evaluateRound(finalStats){
+    //get states from calcwpm
+    const{netWPM, accuracy}=finalStats;
+    const wpmSuccess=netWPM>=currentTarget.minWPM&&netWPM<=currentTarget.maxWPM;
+    const accSuccess= accuracy>= currentTarget.targetAcc
+    if(wpmSuccess&&accSuccess){
+        wins++
+        console.log("Success! Wins: "+wins)
+    }else{
+        console.log("Fail")
+        if(!wpmSuccess){
+            console.log("WPM missed")
+        }
+        if(!accSuccess){
+            console.log("Accuracy missed")
+        }
+    }
+}
 
 function onWordCompleteWithErrors(wordLength){
     console.log("Word completed with errors")
