@@ -41,6 +41,9 @@ overflow: hidden;
     overflow-wrap: break-word;
     word-break: break-word;
     text-align: center;
+    border: 2px dashed gold;
+    /* box-sizing: border-box; */
+    margin: 4cqmin;
 }
 #typing-display.typing #cursorMove{
     animation:none;

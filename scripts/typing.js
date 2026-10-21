@@ -195,5 +195,7 @@ function moveCursor(){
     cursorElement.style.top=targetSpan.offsetTop+"px";
 }
     
-
+window.addEventListener("resize",()=>{
+    moveCursor();
+})
 
