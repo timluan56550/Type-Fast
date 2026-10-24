@@ -6,6 +6,7 @@ let currentTarget=null;
 // const baseCoinValue=10;
 
 const difficulties={
+    //min WPM, max WPM, margin e.g 46 with margin 6 is 40-52,  A=accuracy
     easy:{ min:10, max: 60, margin:6, minA:80, maxA:90, hideWPM:false, hideAcc:false},
     medium:{ min:40, max: 80, margin:3, minA:85, maxA:95, hideWPM:true, hideAcc: false},
     hard:{ min:60, max: 120, margin:1, minA:100, maxA:100, hideWPM:true, hideAcc: true}
@@ -15,6 +16,7 @@ const difficulty=difficulties[currentDifficulty]
 //picks a random WPM and accuracy
 const baseWPM=Math.floor(Math.random()*(difficulty.max-difficulty.min+1))+difficulty.min
 const targetAcc=Math.floor(Math.random()*(difficulty.maxA-difficulty.minA+1))+difficulty.minA
+//this sets teh target for the current phrase
 currentTarget={
     targetWPM: baseWPM,
     minWPM: baseWPM-difficulty.margin,
@@ -27,9 +29,8 @@ console.log("WPM RANGE: "+currentTarget.minWPM+"---"+currentTarget.maxWPM)
 console.log("REQUIRED ACCURACY: GREATER OR EQUAL TO "+currentTarget.targetAcc+"%")
 return currentTarget;
 }
-function evaluateRound(finalStats){
-    //get states from calcwpm
-    const{netWPM, accuracy}=finalStats;
+function evaluateRound({netWPM, accuracy}){
+    //above get stats from calcwpm 
     const wpmSuccess=netWPM>=currentTarget.minWPM&&netWPM<=currentTarget.maxWPM;
     const accSuccess= accuracy>= currentTarget.targetAcc
     if(wpmSuccess&&accSuccess){
@@ -76,7 +77,19 @@ function calcWPM(length, gameStartTime, errors){
 
     return {rawWPM, netWPM, accuracy}
 }
+function calcLiveStats(charCount, gameStartTime, errors){
+    if(!gameStartTime || charCount<=1){
+        return {liveWPM: 0, liveAcc: 100}
+    }
+    const duration = (performance.now()-gameStartTime)/60000
+    if (duration===0){
+        return {liveWPM: 0, liveAcc: 100}
+    }
+    const liveWPM= Math.floor((charCount/5)/duration)
+    const liveAcc= Math.floor(((charCount-errors)/charCount)*100)
+    return{ liveWPM: liveWPM, liveAcc: liveAcc};
 
+}
 
 function calcWPMperWord(wordLength){
     //find duration in minutes

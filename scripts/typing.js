@@ -4,19 +4,30 @@ let currentStartIndex=0;
 let typingTimer;
 let gameStartTime=0;
 let currentDifficulty="easy";
+let currentMode= "phrases"
+
+let UIInterval=null;
 
 // const letterSpan=typingDisplay.querySelectorAll(".letter")
 const typingDisplay=document.getElementById("typing-display")
 //Temporary until I add a Start game button
 newBankItem();
-window.addEventListener("click", ()=>{
-    newBankItem();
-})
+// window.addEventListener("click", ()=>{
+//     newBankItem();
+// })
 
 
 
 function newBankItem(){
+    
+    updateLiveUI(0,100);
+    //random words or set phrases
+    if (currentMode==="words"){
+        currentPhrase= randomWordBank();
+    } 
+    else if (currentMode==="phrases"){
     currentPhrase=randomBank();
+    }
     currentIndex=0;
     currentStartIndex=0;
     typingDisplay.innerHTML="";
@@ -50,6 +61,16 @@ window.addEventListener("keydown", (e)=>{
     }
     if(currentIndex===0){
         gameStartTime=performance.now();
+        if (UIInterval){
+            clearInterval(UIInterval)
+        }
+        UIInterval=setInterval(()=>{
+            if(gameStartTime>0 && currentIndex>0){
+             const totalErrors=typingDisplay.querySelectorAll(".letter.incorrect").length;
+    const liveStats= calcLiveStats(currentIndex, gameStartTime,totalErrors)
+updateLiveUI(liveStats.liveWPM, liveStats.liveAcc)
+            }
+        }, 250);
     }
     if(currentIndex===currentStartIndex){
         wordStartTime=performance.now()
@@ -125,11 +146,13 @@ if(targetChar===" "&& e.key!==" "){
         //shifts over to start a new word
         currentStartIndex=currentIndex;
     }
+   
 
     //when you end a phrase
     if(currentIndex>=currentPhrase.length){
-        const totalErrors=typingDisplay.querySelectorAll(".letter.incorrect").length;
         console.log("new phrase")
+            const totalErrors=typingDisplay.querySelectorAll(".letter.incorrect").length;
+
         const finalStats=calcWPM(currentPhrase.length, gameStartTime, totalErrors);
         evaluateRound(finalStats)
         gameStartTime=0;

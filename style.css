@@ -84,6 +84,18 @@ color: #768082;
     50%{opacity:0;}
     100%{opacity:1;}
 }
+
+#live-ui{
+    position: absolute;
+    bottom: 10cqmin;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 8cqmin;
+    font-family: "Roboto Mobo", monospace;
+    font-size: 6cqmin;
+    color: #c7d0d7;
+    border: 2px dashed gold;
+}
 #cursorMove{
     position: absolute;
     width: 0.5cqmin;
