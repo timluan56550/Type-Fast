@@ -27,7 +27,22 @@ wordBtn.addEventListener("click", ()=>{
 newBankItem();
 })
 function updateLiveUI(liveWPM, liveAcc){
-liveWpmElement.innerText="WPM: "+liveWPM;
+const difficulty=difficulties[currentDifficulty]
+//chekcs the propety of hide WPM and hideAcc
+if (difficulty.hideWPM){
+    liveWpmElement.style.display="none";
+}else{
+    liveWpmElement.innerText="WPM: "+liveWPM;
+
+    liveWpmElement.style.display="inline-block"
+
+}
+if (difficulty.hideAcc){
+    liveAccElement.style.display="none";
+}else{
 liveAccElement.innerText="Acc: "+liveAcc+"%";
+
+    liveAccElement.style.display="inline-block"
+}
 
 }
