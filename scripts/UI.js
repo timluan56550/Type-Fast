@@ -20,21 +20,40 @@ const cursor=document.getElementById("cursorMove")
 function setThemeClass(theme){
     //clears all classes
     everything.className=""
+
     everything.classList.add(theme)
+    
+        moveCursor();
+
+}
+function themeButton(selectedButton){
+    lightBtn.classList.remove("active");
+  darkBtn.classList.remove("active");
+  outsideBtn.classList.remove("active");
+    terraBtn.classList.remove("active");
+
+  selectedButton.classList.add("active")
 }
 lightBtn.addEventListener("click", (e)=>{
+    themeButton(lightBtn)
     setThemeClass("light")
     e.currentTarget.blur()
 })
 darkBtn.addEventListener("click", (e)=>{
+        themeButton(darkBtn)
+
     setThemeClass("dark")
     e.currentTarget.blur()
 })
 outsideBtn.addEventListener("click", (e)=>{
+        themeButton(outsideBtn)
+
     setThemeClass("outside")
     e.currentTarget.blur()
 })
 terraBtn.addEventListener("click", (e)=>{
+        themeButton(terraBtn)
+
     setThemeClass("terra")
     e.currentTarget.blur()
 })
@@ -68,13 +87,21 @@ newBankItem();
 e.currentTarget.blur()
 
 })
+function modeButton(selectedButton){
+    phraseBtn.classList.remove("active");
+  wordBtn.classList.remove("active");
+  selectedButton.classList.add("active")
+}
 phraseBtn.addEventListener("click", (e)=>{
+    modeButton(phraseBtn)
     currentMode="phrases"
 newBankItem();
 e.currentTarget.blur()
 
 })
 wordBtn.addEventListener("click", (e)=>{
+        modeButton(wordBtn)
+
     currentMode="words"
 newBankItem();
 e.currentTarget.blur()

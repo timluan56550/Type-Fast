@@ -1,16 +1,20 @@
-//helps reduce delays an stuff not loading
-const images=[
-    'images/buttons/hovered/easyHovered.png',
-    'images/buttons/hovered/mediumHovered.png',
-    'images/buttons/hovered/hardHovered.png',
-    'images/arrow.png'
+//helps load in the images so it doesnt lag
+const images = [
+'images/buttons/hovered/easyHovered.png',
+  'images/buttons/hovered/mediumHovered.png',
+  'images/buttons/hovered/hardHovered.png',
+  'images/buttons/hovered/phraseHovered.png',
+  'images/buttons/hovered/wordsHovered.png',
+  'images/buttons/hovered/darkHovered.png',
+  'images/buttons/hovered/lightHovered.png',
+  'images/buttons/hovered/terraHovered.png',
+  'images/buttons/hovered/outsideHovered.png',
+  'images/arrow.png'
 ]
-images.forEach((path)=>{
-    const img = new Image();
-    img.src=path
+images.forEach((src) => {
+  const img = new Image();
+  img.src = src;
 })
-
-
 
 
 
@@ -34,12 +38,35 @@ return wordPhrase.join(" ")
 
 
 const bank=[
-    "testWPMbytyping",
-    "testhowlongandifitwrapscorrectlyornot1234567888899d9as9d9asd",
 "The quick brown fox jumps over the lazy dog.",
 "Real green grass grows gigantically against giant, glistening, greenhouses.",
 "terra terra terra terra TERRA terra terra.",
-"Here is a challenge: jEweLrY 659182 -_=^#* IllIliIlil PZpPKpZPkP."
+"Here is a challenge: jEweLrY 659182 -_=^#* IllIliIlil PZpPKpZPkP.",
+"`1234567890-= ~!@#$%^&*()_+ qwertyuiop[]\\ QWERTYUIOP{}| asdfghjkl;' ASDFGHJKL:\" zxcvbnm,./ ZXCVBNM<>?",
+"Six sleek swans swam swiftly southwards.",
+"Peter Piper picked a peck of pickled peppers.",
+"Rubber baby buggy bumpers bounce brightly.",
+"Fresh fried fish, fish fresh fried, fried fish fresh.",
+"The only way to do great work is to love what you do.",
+"In the middle of difficulty lies opportunity.",
+"Success is not final, failure is not fatal: it is the courage to continue that counts.",
+"To be, or not to be, that is the question.",
+"Do what you can, with what you have, where you are.",
+"Franz jagt im komplett verwahrlosten Taxi quer durch Bayern",
+"Minimum aluminum fulfillment columns usually manipulate multi-million municipal minimums.",
+"\"Wait!\" she shouted, \"Did you actually say, 'The project is 99.9% complete'?\"",
+"AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz",
+"We saw eight smart cats swim swiftly across a vast, rough, western sea surface.",
+"(o_o) (x_x) (>_<) (^_^) (:-P) [-_-] <O_o>",
+"(-_-;)~* (='.'=) /(-_-)\\ (T_T) (..;)~!",
+"\\o/ \\o/ *~=>(:::) d(-_-)b (>_>)",
+"( ? _ ? ) (=^._.^=) \\('0')/ <(*_*<)",
+"Learning to type fast requires consistent practice every single day.",
+"Keep your fingers relaxed on the home row keys for optimal speed.",
+"Consistency is much more important than raw speed when building accuracy.",
+"The library was quiet, except for the soft sound of rain outside."
+
+
 ]
 //top 500 most common english words got it from https://www.smart-words.org/500-most-commonly-used-english-words.html
 const wordBank=[
