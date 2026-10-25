@@ -1,5 +1,6 @@
 /* @import url('https://googleapis.com'); */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body{
 background-color: lightslategrey;
@@ -34,7 +35,7 @@ overflow: hidden;
 }
 /* cqmin-picks the lower between block and inline */
 #typing-display{
-    font-size: 6cqmin;
+    font-size: 7.5cqmin;
     font-family: 'Roboto Mono',monospace;
     /* makes it easier to read each character */
     letter-spacing: 0.1cqmin;
@@ -43,10 +44,11 @@ overflow: hidden;
     overflow-wrap: break-word;
     word-break: break-word;
     text-align: center;
-    border: 2px dashed gold;
+    /* border: 2px dashed gold; */
     /* box-sizing: border-box; */
     margin: 4cqmin;
-    padding: 0 10cqmin;
+    padding: 3cqmin 10cqmin;
+    background-color: rgb(54, 59, 59);
 }
 #typing-display.typing #cursorMove{
     animation:none;
@@ -107,25 +109,43 @@ color: #768082;
     align-self: start;
     display: flex;
     gap: 8cqmin;
-    font-size: 8cqmin;
+    font-size: 5cqmin;
     color: #c7d0d7;
     /* border: 2px dashed gold; */
     pointer-events: auto;
     margin-bottom: 10cqmin;
+        font-family: 'Press Start 2P', monospace;
+
+}
+.liveBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.liveLabel{
+    font-size: 4cqmin;
+    color: #c7d0d7;
+}
+.liveNumber{
+    font-size: 7cqmin;
+    font-weight: bold;
+    color: #41ce5c;
 }
 #targetGoal{
      grid-row: 1;
     grid-column: 2;
     justify-self: center;
     align-self: start;
+    margin-top: 5cqmin;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5cqmin;
-    font-size: 6cqmin;
+    gap: 0.4cqmin;
+    font-size: 4cqmin;
     color: #c7d0d7;
     /* border: 2px dashed gold; */
     pointer-events: auto;
+    font-family: 'Press Start 2P', monospace;
    
 }
 #difficulty-selections{
@@ -135,9 +155,10 @@ color: #768082;
     align-self: start;
     display: flex;
     flex-direction: column;
-    gap: 4cqmin;
-    border: 2px dashed gold;
+
+    /* border: 2px dashed gold; */
     pointer-events: auto;
+    padding-left: 5cqmin;
 }
 #mode-selection{
     grid-row: 1;
@@ -150,21 +171,64 @@ color: #768082;
     border: 2px dashed gold;
     pointer-events: auto;
 }
-#difficulty-selections button, #mode-selection button{
-    min-width: 20cqmin;
-    min-height: 10cqmin;
+#mode-selection button{
+   
+}
+#cursorMove{
+    position: absolute;
+    width: 0.6cqmin;
+    height:7cqmin;
+    background-color: #41ce5c;
+    transform: translateY(1.3cqmin);
+    border-radius: 1cqmin;
+    transition: left 0.13s ease-out, top 0.1s ease-out;
+    animation: blink 1s infinite;
+}
+/* button stuff */
+.difficulty-button{
+    position: relative;
+     min-width: 24cqmin;
+    min-height: 8cqmin;
     font-family: 'Roboto Mono', monospace;
     font-size: 3cqmin;
     text-align: center;
     cursor: pointer;
+    border: none;
+    background-color: transparent;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    image-rendering:    pixelated;
+    image-rendering: crisp-edges;
 }
-#cursorMove{
+#easyButton{background-image: url('images/buttons/unhovered/easyUnhovered.png');}
+#mediumButton{background-image: url('images/buttons/unhovered/mediumUnhovered.png');}
+#hardButton{background-image: url('images/buttons/unhovered/hardUnhovered.png');}
+
+#easyButton:hover{background-image: url('images/buttons/hovered/easyHovered.png');}
+#mediumButton:hover{background-image: url('images/buttons/hovered/mediumHovered.png');}
+#hardButton:hover{background-image: url('images/buttons/hovered/hardHovered.png');}
+.difficulty-button::before{
+    content:'';
     position: absolute;
-    width: 0.5cqmin;
-    height:6cqmin;
-    background-color: #41ce5c;
-    transform: translateY(1cqmin);
-    border-radius: 1cqmin;
-    transition: left 0.13s ease-out, top 0.1s ease-out;
-    animation: blink 1s infinite;
+    top: 50%;
+    left:-3.5cqmin;
+    width: 2.5cqmin;
+    height: 2.5cqmin;
+    background-image: url('images/arrow.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    image-rendering:    pixelated;
+    image-rendering: crisp-edges;
+}
+.difficulty-button:hover::before{
+    opacity: 1;
+    animation: arrow 1.5s infinite steps(1);
+}
+
+
+
+@keyframes arrow{
+    0%{transform: translateY(-50%) translateX(0);}
+    50%{transform: translateY(-50%) translateX(-0.8cqmin);}
 }

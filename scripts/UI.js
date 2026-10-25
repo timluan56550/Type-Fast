@@ -32,7 +32,7 @@ const difficulty=difficulties[currentDifficulty]
 if (difficulty.hideWPM){
     liveWpmElement.style.display="none";
 }else{
-    liveWpmElement.innerText="WPM: "+liveWPM;
+    liveWpmElement.innerText=liveWPM;
 
     liveWpmElement.style.display="inline-block"
 
@@ -40,7 +40,7 @@ if (difficulty.hideWPM){
 if (difficulty.hideAcc){
     liveAccElement.style.display="none";
 }else{
-liveAccElement.innerText="Acc: "+liveAcc+"%";
+liveAccElement.innerText=liveAcc+"%";
 
     liveAccElement.style.display="inline-block"
 }

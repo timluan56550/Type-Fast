@@ -18,17 +18,23 @@
     
     <div id="UI">
         <div id="difficulty-selections">
-        <button id="easyButton">Easy</button>
-        <button id="mediumButton">Medium</button>
-        <button id="hardButton">Hard</button>
+        <button id="easyButton" class="difficulty-button"></button>
+        <button id="mediumButton" class="difficulty-button"></button>
+        <button id="hardButton" class="difficulty-button"></button>
     </div>
     <div id="mode-selection">
         <button id="phraseButton">Phrases</button>
         <button id="wordButton">Words</button>
     </div>
     <div id="live-ui">
-            <span id="liveWpm">WPM: 0</span>
-            <span id="liveAcc">Acc: 100%</span>
+        <div class="liveBox">
+            <span class="liveLabel">WPM</span>
+            <span id="liveWpm" class="liveNumber">0</span>
+        </div>
+        <div class="liveBox">
+            <span class="liveLabel">Acc</span>
+            <span id="liveAcc" class="liveNumber" >N/A</span>
+    </div>
     </div>
     <div id="targetGoal">
         <div>Try to hit a WPM between <span id="goalWpm">0-0</span></div>
