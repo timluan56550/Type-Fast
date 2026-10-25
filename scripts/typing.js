@@ -33,6 +33,7 @@ function newBankItem(){
     typingDisplay.innerHTML="";
     //starts a new round
     gamemode(currentDifficulty);
+    updateTargetGoalUI();
     //makes a copy of the cursor because i jsut cleared the HTMl
     const cursorElement=document.createElement("div")
     cursorElement.id="cursorMove"

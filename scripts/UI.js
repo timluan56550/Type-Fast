@@ -4,43 +4,118 @@ const mediumBtn= document.getElementById("mediumButton")
 const phraseBtn= document.getElementById("phraseButton")
 const wordBtn= document.getElementById("wordButton")
 const liveAccElement=document.getElementById("liveAcc")
+const lightBtn=document.getElementById("light")
+const darkBtn=document.getElementById("dark")
+const outsideBtn=document.getElementById("outside")
+const terraBtn=document.getElementById("terra")
 
 const liveWpmElement=document.getElementById("liveWpm")
-easyBtn.addEventListener("click", ()=>{
+const goalWpmElement=document.getElementById("goalWpm")
+const goalAccElement=document.getElementById("goalAcc")
+const winsElement=document.getElementById("winNumber")
+//changing themes
+const everything=document.getElementById("everything")
+const displayBox=document.getElementById("typing-display")
+const cursor=document.getElementById("cursorMove")
+function setThemeClass(theme){
+    //clears all classes
+    everything.className=""
+    everything.classList.add(theme)
+}
+lightBtn.addEventListener("click", (e)=>{
+    setThemeClass("light")
+    e.currentTarget.blur()
+})
+darkBtn.addEventListener("click", (e)=>{
+    setThemeClass("dark")
+    e.currentTarget.blur()
+})
+outsideBtn.addEventListener("click", (e)=>{
+    setThemeClass("outside")
+    e.currentTarget.blur()
+})
+terraBtn.addEventListener("click", (e)=>{
+    setThemeClass("terra")
+    e.currentTarget.blur()
+})
+difficultyButton(easyBtn)
+function difficultyButton(selectedButton){
+    easyBtn.classList.remove("active");
+  mediumBtn.classList.remove("active");
+  hardBtn.classList.remove("active");
+  selectedButton.classList.add("active")
+}
+easyBtn.addEventListener("click", (e)=>{
 currentDifficulty="easy"
+difficultyButton(easyBtn)
 newBankItem();
+//stops the focus
+e.currentTarget.blur()
 })
-mediumBtn.addEventListener("click", ()=>{
+mediumBtn.addEventListener("click", (e)=>{
 currentDifficulty="medium"
+difficultyButton(mediumBtn)
+
 newBankItem();
+e.currentTarget.blur()
+
 })
-hardBtn.addEventListener("click", ()=>{
+hardBtn.addEventListener("click", (e)=>{
 currentDifficulty="hard"
+difficultyButton(hardBtn)
+
 newBankItem();
+e.currentTarget.blur()
+
 })
-phraseBtn.addEventListener("click", ()=>{
+phraseBtn.addEventListener("click", (e)=>{
     currentMode="phrases"
 newBankItem();
+e.currentTarget.blur()
+
 })
-wordBtn.addEventListener("click", ()=>{
+wordBtn.addEventListener("click", (e)=>{
     currentMode="words"
 newBankItem();
+e.currentTarget.blur()
+
 })
+// updates the target goal ui
+function updateTargetGoalUI(){
+    //updates the WPM goal
+if(goalWpmElement){
+        goalWpmElement.innerText=currentTarget.minWPM+"-"+currentTarget.maxWPM
+}
+//updates the Accuracy goal
+if(goalAccElement){
+    goalAccElement.innerText=currentTarget.targetAcc+"%"
+}
+if(winsElement){
+    winsElement.innerText=wins
+}
+}
+
 function updateLiveUI(liveWPM, liveAcc){
 const difficulty=difficulties[currentDifficulty]
 //chekcs the propety of hide WPM and hideAcc
 if (difficulty.hideWPM){
-    liveWpmElement.style.display="none";
+    liveWpmElement.innerText="Hidden"
+    liveWpmElement.classList.add("hidden")
 }else{
     liveWpmElement.innerText=liveWPM;
+        liveWpmElement.classList.remove("hidden")
+
 
     liveWpmElement.style.display="inline-block"
 
 }
 if (difficulty.hideAcc){
-    liveAccElement.style.display="none";
+    liveAccElement.innerText="Hidden"
+    liveAccElement.classList.add("hidden")
+
 }else{
 liveAccElement.innerText=liveAcc+"%";
+        liveAccElement.classList.remove("hidden")
 
     liveAccElement.style.display="inline-block"
 }

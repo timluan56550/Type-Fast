@@ -17,6 +17,10 @@
     </div>
     
     <div id="UI">
+        <div id="wins">
+            <span class="winLabel">WINS:</span>
+            <span id="winNumber">0</span>
+        </div>
         <div id="difficulty-selections">
         <button id="easyButton" class="difficulty-button"></button>
         <button id="mediumButton" class="difficulty-button"></button>
@@ -28,14 +32,21 @@
     </div>
     <div id="live-ui">
         <div class="liveBox">
-            <span class="liveLabel">WPM</span>
+            <span class="liveLabel">WPM:</span>
             <span id="liveWpm" class="liveNumber">0</span>
         </div>
         <div class="liveBox">
-            <span class="liveLabel">Acc</span>
+            <span class="liveLabel">ACC:</span>
             <span id="liveAcc" class="liveNumber" >N/A</span>
     </div>
     </div>
+<div id="themeSelection">
+    <button id="dark" class="themeButton">Dark</button>
+        <button id="light" class="themeButton">Light</button>
+        <button id="outside" class="themeButton">Outside</button>
+        <button id="terra" class="themeButton">Terra</button>
+
+        </div>
     <div id="targetGoal">
         <div>Try to hit a WPM between <span id="goalWpm">0-0</span></div>
        <div>And an Accuracy over <span id="goalAcc">0%</span></div>

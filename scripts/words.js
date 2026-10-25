@@ -1,3 +1,19 @@
+//helps reduce delays an stuff not loading
+const images=[
+    'images/buttons/hovered/easyHovered.png',
+    'images/buttons/hovered/mediumHovered.png',
+    'images/buttons/hovered/hardHovered.png',
+    'images/arrow.png'
+]
+images.forEach((path)=>{
+    const img = new Image();
+    img.src=path
+})
+
+
+
+
+
 //gives a random item in the bank
 function randomBank(){
 //Picks a random number based on the length of the list

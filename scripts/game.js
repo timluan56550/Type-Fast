@@ -11,6 +11,7 @@ const difficulties={
     medium:{ min:40, max: 80, margin:3, minA:85, maxA:95, hideWPM:true, hideAcc: false},
     hard:{ min:60, max: 120, margin:1, minA:100, maxA:100, hideWPM:true, hideAcc: true}
 }
+
 function gamemode(){
 const difficulty=difficulties[currentDifficulty]
 //picks a random WPM and accuracy
