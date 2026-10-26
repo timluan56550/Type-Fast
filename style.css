@@ -95,6 +95,8 @@ color: #c7d0d7;
     font-size: 5cqmin;
     color: #2a452f;
 }
+
+
 /* TERRA THEMEMEMEMEMEMEMEMEMEM */
 #everything.terra{
     background-color: #ffca86;
@@ -108,16 +110,10 @@ color: #c7d0d7;
     background-color: #e9ae65;
     font-family: 'Fredoka', monospace;
 }
-#everything.terra .liveNumber.hidden{
-    font-size: 10cqmin;
-    color: #eec35f;
-}
-#everything.terra .letter.untyped{
-    color: #532d1c;
-}
 #everything.terra .liveLabel,
 #everything.terra #targetGoal,
 #everything.terra .winLabel
+
 {
     font-size: 7cqmin;
     font-family: 'Fredoka', monospace;
@@ -125,17 +121,38 @@ color: #c7d0d7;
     /* border of eahc letters */
     /* -webkit-text-stroke: 0.1cqmin black; */
 }
+
+#everything.terra .liveNumber.hidden{
+    font-size: 10cqmin;
+    color: #eec35f;
+}
+#everything.terra .letter.untyped{
+    color: #532d1c;
+}
+
 #everything.terra .letter.correct{
        color: #dae3eb;
 
 }
 #everything.terra .liveNumber,
 #everything.terra #winNumber
+
 {
-    font-size: 10cqmin;
+    font-size: 7cqmin;
         font-family: 'Fredoka', monospace;
 
     color: #daa127;
+}
+#everything.terra .liveNumber {
+  font-size: 10cqmin;
+  font-family: 'Fredoka', monospace;
+  color: #daa127;
+}
+#everything.terra #lastWpm,
+#everything.terra #lastAcc {
+  font-size: 7cqmin;
+  font-family: 'Fredoka', monospace;
+  color: #daa127;
 }
 #everything.terra .liveBox,
 #everything.terra #wins{
@@ -182,7 +199,7 @@ color: #c7d0d7;
 
 }
 #everything.outside .liveNumber,
-#everything.outside #winNumber
+#everything.outside #winGroup
 {
     font-size: 10cqmin;
         font-family: 'ubuntu', monospace;
@@ -268,15 +285,16 @@ color: #768082;
 #live-ui{
     grid-row: 3;
     grid-column: 2;
-    justify-self: center;
-    align-self: center;
+    justify-self: flex-end;
+    align-self: flex-end;
+    margin-right: 20cqmin;
     display: flex;
     gap: 8cqmin;
     font-size: 5cqmin;
     color: #c7d0d7;
     /* border: 2px dashed gold; */
     pointer-events: auto;
-    margin-bottom: 10cqmin;
+    margin-bottom: 5cqmin;
         font-family: 'Press Start 2P', monospace;
 
 }
@@ -320,6 +338,48 @@ color: #768082;
 
    
 }
+#winsGroup{
+    grid-row: 3;
+    grid-column: 1;
+    justify-self: start;
+    align-self: flex-end;
+    margin-bottom:  5cqmin;
+    margin-left: 3cqmin;
+    max-width: 100%;
+    display: flex;
+    align-items: flex-end;
+    gap: 2cqmin;
+    font-family: 'Press Start 2P', monospace;
+    padding: 0;
+}
+#lastStats{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0cqmin;
+}
+.lastRow{
+    display: flex;
+    gap:1cqmin;
+    text-align: center;
+}
+.lastStat{
+    display: flex;
+    flex-direction: column;
+    gap: 0cqmin;
+    align-items: center;  
+    
+}
+#lastWpm{
+    font-size: 6cqmin;
+    font-weight: bold;
+    color: #41ce5c;
+}
+#lastAcc{
+    font-size: 6cqmin;
+    font-weight: bold;
+    color: #41ce5c;
+}
 #wins{
     grid-row: 3;
     grid-column: 1;
@@ -333,7 +393,7 @@ color: #768082;
 
 }
 .winLabel{
-    font-size: 3.5cqmin;
+    font-size: 4cqmin;
     color: #c7d0d7;
 }
 #winNumber{

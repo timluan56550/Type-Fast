@@ -3,7 +3,8 @@ let wordStartTime=0;
 let streak=0;
 let wins=0;
 let currentTarget=null;
-
+const lastWpmElement = document.getElementById("lastWpm");
+const lastAccElement = document.getElementById("lastAcc");
 // const baseCoinValue=10;
 //allows the audio to be played multiple times
 
@@ -32,13 +33,20 @@ console.log("WPM RANGE: "+currentTarget.minWPM+"---"+currentTarget.maxWPM)
 console.log("REQUIRED ACCURACY: GREATER OR EQUAL TO "+currentTarget.targetAcc+"%")
 return currentTarget;
 }
-function evaluateRound({netWPM, accuracy}){
+function evaluateRound({rawWPM, accuracy}){
     //above get stats from calcwpm 
-    const wpmSuccess=netWPM>=currentTarget.minWPM&&netWPM<=currentTarget.maxWPM;
+    if(lastWpmElement){
+        lastWpmElement.innerText=Math.round(rawWPM)
+    }
+    if(lastAccElement){
+        lastAccElement.innerText=Math.round(accuracy)+"%"
+    }
+    const wpmSuccess=rawWPM>=currentTarget.minWPM&&rawWPM<=currentTarget.maxWPM;
     const accSuccess= accuracy>= currentTarget.targetAcc
     if(wpmSuccess&&accSuccess){
         wins++
         console.log("Success! Wins: "+wins)
+        updateTargetGoalUI()
     }else{
         console.log("Fail")
         if(!wpmSuccess){
