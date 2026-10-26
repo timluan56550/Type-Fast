@@ -172,6 +172,13 @@ color: #c7d0d7;
     background-color: #9df42b;
     font-family: 'Ubuntu', monspace;
 }
+#everything.outside #lastWpm,
+#everything.outside #lastAcc,
+#everything.outside #winNumber{
+  font-size: 7cqmin;
+  font-family: 'Ubuntu', monospace;
+  color: #3cde72;
+}
 #everything.outside .liveNumber.hidden{
     font-size: 10cqmin;
     color: #245415;
