@@ -8,7 +8,7 @@ A fun typing test!
         
  - 2 Different modes: Phrases and Words!
         
-        Phrases - Picks a random phrases I wrote!
+        Phrases - Picks a random phrases out of a list of options!
         Words - Combines 10 random words into a sentence!
 
  - Choose from 4 different themes! 
