@@ -1,3 +1,6 @@
+const click=new Audio("audio/sound/click.mp3");
+const select=new Audio("audio/sound/select.mp3");
+
 const easyBtn= document.getElementById("easyButton")
 const hardBtn= document.getElementById("hardButton")
 const mediumBtn= document.getElementById("mediumButton")
@@ -17,6 +20,25 @@ const winsElement=document.getElementById("winNumber")
 const everything=document.getElementById("everything")
 const displayBox=document.getElementById("typing-display")
 const cursor=document.getElementById("cursorMove")
+const allButtons = document.querySelectorAll('button');
+allButtons.forEach(button => {
+    button.addEventListener('mouseenter', (event) => {
+        soundSelect();
+    })
+    button.addEventListener('click', (event) => {
+        soundClick();
+    })
+})
+function soundClick(){
+cloneClick=click.cloneNode();
+cloneClick.volume=0.1;
+cloneClick.play();
+}
+function soundSelect(){
+cloneSelect=select.cloneNode();
+cloneSelect.volume=0.06;
+cloneSelect.play();
+}
 function setThemeClass(theme){
     //clears all classes
     everything.className=""

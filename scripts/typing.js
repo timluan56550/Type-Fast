@@ -5,6 +5,36 @@ let typingTimer;
 let gameStartTime=0;
 let currentDifficulty="easy";
 let currentMode= "phrases"
+//music and audio stuff
+const keyboard=new Audio("audio/sound/keyboard.mp3");
+const backgroundMusic=new Audio("audio/music/background.mp3");
+//plays the song
+function playSong(){
+backgroundMusic.volume=0.03;
+backgroundMusic.play();
+}
+//loops the song
+backgroundMusic.addEventListener('ended',()=>{
+playSong();
+});
+//either click or keydown will start the music without duplicating
+function activateAudio(){
+if(backgroundMusic.paused){
+    playSong();
+}
+ document.removeEventListener('click', activateAudio);
+document.removeEventListener('keydown', activateAudio);
+}
+document.addEventListener('click', activateAudio)
+document.addEventListener('keydown', activateAudio)
+
+
+function soundKeyboard(){
+cloneKeyboard=keyboard.cloneNode();
+cloneKeyboard.volume=0.1;
+cloneKeyboard.speed=1.3
+cloneKeyboard.play();
+}
 
 let UIInterval=null;
 
@@ -59,6 +89,9 @@ window.addEventListener("keydown", (e)=>{
     //return if its shift, ctrl, esc but not backspace
     if(e.key.length>1 && e.key!=="Backspace"){
         return;
+    }
+    if (e.key!=="Backspace"){
+        soundKeyboard();
     }
     if(currentIndex===0){
         gameStartTime=performance.now();

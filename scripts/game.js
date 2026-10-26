@@ -3,7 +3,9 @@ let wordStartTime=0;
 let streak=0;
 let wins=0;
 let currentTarget=null;
+
 // const baseCoinValue=10;
+//allows the audio to be played multiple times
 
 const difficulties={
     //min WPM, max WPM, margin e.g 46 with margin 6 is 40-52,  A=accuracy
