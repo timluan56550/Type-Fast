@@ -1,5 +1,8 @@
 # Type-Fast
 A fun typing test!
+
+**How to play**
+
  - 3 different difficulties to choose from: Easy, Medium, and Hard!
  - Different difficulties change the goals of the WPM and Accuracy!
         
