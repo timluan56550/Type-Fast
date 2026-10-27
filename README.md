@@ -23,6 +23,7 @@ A fun typing test!
 
 Make sure you let all the assets load in!
 
+If you don't here the music after clicking or pressing a key, refresh the screen, thanks!
 Music I used:
 
 Music: https://www.bensound.com/free-music-for-videos
